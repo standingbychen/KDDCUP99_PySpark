@@ -137,6 +137,7 @@ def drawConfusionMatrix(true,pred,labels):
     :true: true label list
     :pre:  predict label list
     :label: label, decide order of x , y
+    :return: confusion matrix, plt
     '''
     from sklearn.metrics import confusion_matrix # 根据true和pred，lebals，生成混淆矩阵
     import matplotlib.pyplot as plt
@@ -157,7 +158,7 @@ def drawConfusionMatrix(true,pred,labels):
             plt.annotate(cm[x,y],xy=(y,x),horizontalalignment='center',verticalalignment='center')
     plt.ylabel('True label')# 坐标轴标签
     plt.xlabel('Predicted label')# 坐标轴标签    
-    return plt
+    return cm,plt
 
 def getConfusionMatrix(true,pred,labels):
     return confusion_matrix(true,pred,labels)
@@ -195,7 +196,7 @@ def preAndRec(cm,labels):
         print("%s : \t %f"%( labels[i], solve[i]))
     solve = calculateRecall(cm=cm)
     print()
-    print("Precision:")
+    print("Recall:")
     for i in range(len(solve)):
         print("%s : \t %f"%( labels[i], solve[i]))
     print('-'*30)
